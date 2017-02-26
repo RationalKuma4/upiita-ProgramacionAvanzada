@@ -1,9 +1,6 @@
-#include <unistd.h>
 #include <stdio.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include <stdlib.h>
 
-int pid, i;
 FILE* archivo;
 const char* nombre = "Archivo.txt";
 const char* escribir = "w+";
@@ -11,27 +8,14 @@ const char* escribir = "w+";
 void EscribirArchivo(char* cadena);
 void LeerArchivo();
 
-void main()
+int main()
 {
-	printf("%d \n", getpid());
-	for (i = 0; i<4; i++)
-	{
-		pid = fork();
-		if (pid<0)
-			printf("Ocurrion un error\n");
-		else if (pid == 0)
-		{
-			printf("Es el proceso hijo %d \n", getpid());
-			//break;
-			//printf("Mi papa es %d \n", getppid());
-		}
-		else if (pid>0)
-		{
-			wait(&pid);
-			printf("Codigo del proceso papa %d \n", pid);
-			break;
-		}
-	}
+	char* palabra;
+	scanf(&palabra);
+	EscribirArchivo(palabra);
+	LeerArchivo();
+
+	return(0);
 }
 
 void EscribirArchivo(char* cadena)
